@@ -26,19 +26,31 @@ module.exports = {
       loader: 'file?name=assets/[name].[hash].[ext]'
     }, {
       test: /\.css$/,
-      exclude: helpers.root('src', 'app'),
+      exclude: [
+        helpers.root('src', 'app'),
+        helpers.root('src', 'components')
+      ],
       loader: ExtractTextPlugin.extract('style', 'css?sourceMap')
     }, {
       test: /\.css$/,
-      include: helpers.root('src', 'app'),
+      include: [
+        helpers.root('src', 'app'),
+        helpers.root('src', 'components')
+      ],
       loader: 'raw'
     }, {
       test: /\.scss$/,
-      exclude: helpers.root('src', 'app'),
+      exclude: [
+        helpers.root('src', 'app'),
+        helpers.root('src', 'components')
+      ],
       loader: ExtractTextPlugin.extract('style', 'css?sourceMap!sass')
     }, {
       test: /\.scss$/,
-      include: helpers.root('src', 'app'),
+      include: [
+        helpers.root('src', 'app'),
+        helpers.root('src', 'components')
+      ],
       loader: 'raw!sass'
     }],
   },

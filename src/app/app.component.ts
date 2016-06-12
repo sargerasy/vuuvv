@@ -2,10 +2,12 @@ import {Component} from '@angular/core';
 
 import '../styles.scss';
 
+import '../components/button/button';
+
 @Component({
   selector: 'vu-app',
   template: require('./app.component.html'),
-  styles: [require('./app.component.scss')]
+  styles: [require('./app.component.scss')],
 })
 
 export class AppComponent {

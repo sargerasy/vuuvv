@@ -7,4 +7,4 @@ if (process.env.ENV === 'production') {
   enableProdMode();
 }
 
-bootstrap(<any>AppComponent, []);
+bootstrap(AppComponent, []);
