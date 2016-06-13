@@ -13,6 +13,7 @@ import { TestComponentBuilder } from '@angular/compiler/testing';
 // import { AsyncTestFn } from '@angular/core/testing';
 import { provide, Component } from '@angular/core';
 import { DebugElement } from '@angular/core';
+import { By } from '@angular/platform-browser';
 
 import { MdButton } from './button';
 
@@ -26,7 +27,7 @@ describe('MdButton', () => {
     it('should handle a click on the button', (done: () => void) => {
       return builder.createAsync(TestApp).then((fixture) => {
         let testComponent = fixture.debugElement.componentInstance;
-        let buttonDebugElement = getChildDebugElement(fixture.debugElement, 'button');
+        let buttonDebugElement = fixture.debugElement.query(By.css('button'));
 
         buttonDebugElement.nativeElement.click();
         expect(testComponent.clickCount).toBe(1);
