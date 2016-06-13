@@ -11,8 +11,7 @@ import {
 } from '@angular/core/testing';
 import { TestComponentBuilder } from '@angular/compiler/testing';
 // import { AsyncTestFn } from '@angular/core/testing';
-import { provide, Component } from '@angular/core';
-import { DebugElement } from '@angular/core';
+import { provide, Component, DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
 import { MdButton } from './button';
