@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ViewEncapsulation} from '@angular/core';
 
 import '../styles.scss';
 
@@ -8,7 +8,8 @@ import { MdButton } from '../components/button/button';
   selector: 'vu-app',
   template: require('./app.component.html'),
   styles: [require('./app.component.scss')],
-  directives: [MdButton]
+  directives: [MdButton],
+  encapsulation: ViewEncapsulation.None,
 })
 
 export class AppComponent {

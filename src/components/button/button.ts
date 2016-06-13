@@ -10,7 +10,8 @@ import { Component, ViewEncapsulation, OnChanges, SimpleChange } from '@angular/
     '(focus)': 'onFocus()',
     '(blur)': 'onBlur()',
     '[class.md-button-focus]': 'isKeyboardFocused',
-  }
+  },
+  encapsulation: ViewEncapsulation.None,
 })
 export class MdButton {
   isMouseDown: boolean = false;
