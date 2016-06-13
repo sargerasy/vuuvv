@@ -10,4 +10,4 @@ describe('App', () => {
   it('should work', inject([AppComponent], (app: AppComponent) => {
     expect(2).toBe(2);
   }));
-})
+});

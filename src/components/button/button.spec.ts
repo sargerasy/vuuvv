@@ -43,7 +43,11 @@ function getChildDebugElement(parent: DebugElement, tagName: string): DebugEleme
 
 @Component({
   selector: 'test-app',
-  template: `<button md-button type="button" (click)="increment()" [disabled]="isDisabled">Go</button>`,
+  template: `
+    <button md-button type="button" (click)="increment()" [disabled]="isDisabled">
+      Go
+    </button>
+  `,
   directives: [MdButton],
 })
 class TestApp {

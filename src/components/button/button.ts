@@ -49,7 +49,7 @@ export class MdButton {
     '[attr.aria-disabled]': 'isAriaDisabled',
   }
 })
-export class MdAnchor extends MdButton implements OnChanges{
+export class MdAnchor extends MdButton implements OnChanges {
   tabIndex: number;
   disabled_: boolean;
 
@@ -67,7 +67,7 @@ export class MdAnchor extends MdButton implements OnChanges{
     }
   }
 
-  ngOnChanges(changes:{[propName: string]:SimpleChange}) {
+  ngOnChanges(changes: {[propName: string]: SimpleChange}) {
     this.tabIndex = this.disabled ? -1 : 0;
   }
 
