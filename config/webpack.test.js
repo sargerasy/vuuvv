@@ -17,10 +17,10 @@ module.exports = {
       loader: 'null'
     }, {
       test: /\.css$/,
-      loader: 'raw'
+      loader: 'empty-string'
     }, {
       test: /\.scss$/,
-      loader: 'raw'
+      loader: 'empty-string'
     }]
   }
 }

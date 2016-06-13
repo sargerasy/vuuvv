@@ -1,0 +1,7 @@
+@import "../../core/style/variables.scss";
+
+.hello {
+  display: flex;
+  width: $size;
+  height: $size;
+}

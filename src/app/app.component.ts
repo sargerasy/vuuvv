@@ -2,18 +2,14 @@ import {Component} from '@angular/core';
 
 import '../styles.scss';
 
-import '../components/button/button';
+import { MdButton } from '../components/button/button';
 
 @Component({
   selector: 'vu-app',
   template: require('./app.component.html'),
   styles: [require('./app.component.scss')],
+  directives: [MdButton]
 })
 
 export class AppComponent {
-  defaultMeaning: number = 42;
-
-  meaningOfLife(meaning: number) {
-    return `The meaning of life is ${meaning || this.defaultMeaning}`
-  }
 }
