@@ -15,7 +15,7 @@ ES6 or TypeScript.
 Comments that explain what some block of code does are nice; they can tell you something in less time than it would take to follow through the code itself.
 
 Comments that explain why some block of code exists at all, or does something the way it does,
-are invaluable. The "Why" is difficult, or sometimes impossible, to track down without seeking out the original author. When collaborators are in the same room, this hurts productivity.
+are _invaluable_. The "Why" is difficult, or sometimes impossible, to track down without seeking out the original author. When collaborators are in the same room, this hurts productivity.
 Whe collaborators are in different timezones, this can be devastating to productivity.
 
 For Example, this is a not-very-useful comment:
@@ -39,14 +39,14 @@ if (!attrs['tabindex']) {
 #### Prefer more focused, granular components vs. complex, configurable components.
 
 For example, rather than doing this:
-```ts
+```html
 <md-button>Basic button</md-button>
 <md-button class="md-fab">FAB</md-button>
 <md-button class="md-icon-button">pony</md-button>
 ```
 
 do this:
-```ts
+```html
 <md-button>Basic button</md-button>
 <md-fab>FAB</md-button>
 <md-icon-button>pony</md-button>
