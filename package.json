@@ -14,6 +14,7 @@
     "test": "karma start",
     "test-watch": "karma start --no-single-run --auto-watch",
     "build": "rimraf dist && webpack --config config/webpack.prod.js --progress --profile --bail",
+    "lint": "tslint --force 'src/**/*.ts'",
     "postinstall": "typings install"
   },
   "author": "vuuvv",
@@ -37,6 +38,7 @@
     "zone.js": "^0.6.12"
   },
   "devDependencies": {
+    "autoprefixer": "^6.3.6",
     "css-loader": "^0.23.1",
     "empty-string-loader": "^0.1.1",
     "extract-text-webpack-plugin": "^1.0.1",
@@ -51,6 +53,7 @@
     "karma-webpack": "^1.7.0",
     "node-sass": "^3.7.0",
     "phantomjs-prebuilt": "^2.1.7",
+    "postcss-loader": "^0.9.1",
     "raw-loader": "^0.5.1",
     "rimraf": "^2.5.2",
     "sass-loader": "^3.2.0",
