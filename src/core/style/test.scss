@@ -2,4 +2,4 @@
 @import '_theme-functions';
 @import '_default-theme';
 
-@debug (md-color($md-primary));
+@debug (md-color($md-background, background));
