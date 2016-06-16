@@ -156,7 +156,6 @@ export class MdSidenav {
    * @private
    */
   @HostListener('transitionend', ['$event']) private onTransitionEnd_(e: any) {
-    console.warn('transitionend');
     if (e.target === this.elementRef_.nativeElement
          // Simpler version to check for prefixes.
          && e.propertyName.endsWith('transform')) {
