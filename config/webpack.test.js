@@ -17,10 +17,10 @@ module.exports = {
       loader: 'null'
     }, {
       test: /\.css$/,
-      loader: 'empty-string'
+      loader: 'raw!postcss'
     }, {
       test: /\.scss$/,
-      loader: 'empty-string'
+      loader: 'raw!postcss!sass'
     }]
   }
 }
