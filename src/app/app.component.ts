@@ -1,19 +1,32 @@
-import {Component, ViewEncapsulation} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { RouteConfig, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
 
 import '../styles.scss';
 
-import { MdButton } from '../components/button/button';
-import { MD_CARD_DIRECTIVES } from '../components/card/card';
+import { ButtonDemo } from './button/button-demo';
+import { CardDemo } from './card/card-demo';
+import { SidenavDemo } from './sidenav/sidenav-demo';
 import { Dir } from '../directives/dir/dir';
-import { MD_SIDENAV_DIRECTIVES } from '../components/sidenav/sidenav';
+import { MdButton } from '../components/button/button';
+
+@Component({
+  selector: 'home',
+  template: ''
+})
+export class Home {}
 
 @Component({
   selector: 'vu-app',
   template: require('./app.component.html'),
   styles: [require('./app.component.scss')],
-  directives: [MdButton, MD_CARD_DIRECTIVES, Dir, MD_SIDENAV_DIRECTIVES],
+  directives: [ROUTER_DIRECTIVES, Dir, MdButton],
   encapsulation: ViewEncapsulation.None,
 })
-
+@RouteConfig([
+  {path: '/', name: 'Home', component: Home},
+  {path: '/button', name: 'ButtonDemo', component: ButtonDemo},
+  {path: '/card', name: 'CardDemo', component: CardDemo},
+  {path: '/sidenav', name: 'SidenavDemo', component: SidenavDemo}
+])
 export class AppComponent {
 }
