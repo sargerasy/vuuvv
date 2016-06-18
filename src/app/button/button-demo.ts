@@ -7,4 +7,6 @@ import { MdButton, MdAnchor } from '../../components/button/button';
   styles: [require('./button-demo.scss')],
   directives: [MdButton, MdAnchor]
 })
-export class ButtonDemo {}
+export class ButtonDemo {
+  isDisabled: boolean = false;
+}

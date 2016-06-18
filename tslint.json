@@ -19,6 +19,7 @@
     "no-trailing-whitespace": true,
     "no-bitwise": true,
     "no-shadowed-variable": true,
+    "no-unused-expression": true,
     "one-line": [
       true,
       "check-catch",

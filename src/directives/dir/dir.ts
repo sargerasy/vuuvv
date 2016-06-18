@@ -22,7 +22,7 @@ import { OneOf } from '../../core/annotations/one-of';
      return this.dir_;
    }
    set dir(v: string) {
-     const old = this.dir_;
+     let old = this.dir_;
      this.dir_ = v;
      if (old !== this.dir_) {
        this.dirChange.emit(null);

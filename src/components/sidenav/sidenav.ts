@@ -18,6 +18,7 @@ import {
   Type
 }
 from '@angular/core';
+import { isPresent } from '@angular/common/src/facade/lang';
 import { BaseException } from '@angular/common/src/facade/exceptions';
 
 import { Dir } from '../../directives/dir/dir';
@@ -107,7 +108,10 @@ export class MdSidenav {
    * open() when it's closed.
    * @param isOpen
    */
-  toggle(isOpen: boolean = !this.opened): Promise<void> {
+  toggle(isOpen?: boolean): Promise<void> {
+    if (!isPresent(isOpen)) {
+      isOpen = !this.opened;
+    }
     // Shortcut it if we're already opened.
     if (isOpen === this.opened) {
       if (!this.transition_) {
@@ -126,8 +130,8 @@ export class MdSidenav {
       this.onCloseStart.emit(null);
     }
 
-    const emitter = isOpen ? this.onOpen : this.onClose;
-    const other = isOpen ? this.onClose : this.onOpen;
+    let emitter = isOpen ? this.onOpen : this.onClose;
+    let other = isOpen ? this.onClose : this.onOpen;
 
     if (isOpen) {
       if (!this.openPromise_) {
@@ -160,20 +164,21 @@ export class MdSidenav {
          // Simpler version to check for prefixes.
          && e.propertyName.endsWith('transform')) {
       this.transition_ = false;
+      console.warn(`transition end: ${this.opened_}`);
       if (this.opened_) {
-        if (this.openPromise_) {
+        if (this.openPromise_ != null) {
           this.openPromiseResolve_();
         }
-        if (this.closePromise_) {
+        if (this.closePromise_ != null) {
           this.closePromiseReject_();
         }
 
         this.onOpen.emit(null);
       } else {
-        if (this.closePromise_) {
+        if (this.closePromise_ != null) {
           this.closePromiseResolve_();
         }
-        if (this.openPromise_) {
+        if (this.openPromise_ != null) {
           this.openPromiseReject_();
         }
 
@@ -228,7 +233,6 @@ export class MdSidenav {
     return 0;
   }
 
-  private console: any;
   private transition_: boolean = false;
   private openPromise_: Promise<void>;
   private openPromiseResolve_: () => void;
@@ -259,7 +263,7 @@ export class MdSidenavLayout implements AfterContentInit {
   constructor(@Optional() @Host() private dir_: Dir) {
     // If a `Dir` directive exists up the tree, listen direction changes and update the left/right
     // properties to point to the proper start/ent
-    if (dir_) {
+    if (dir_ != null) {
       dir_.dirChange.subscribe(() => this.validateDrawers_());
     }
   }
@@ -295,12 +299,12 @@ export class MdSidenavLayout implements AfterContentInit {
     // Ensure that we have at most one start and one end sidenav.
     this.sidenavs_.toArray().forEach(drawer => {
       if (drawer.align === 'end') {
-        if (this.end_) {
+        if (this.end_ != null) {
           throw new MdDuplicatedSidenavException('end');
         }
         this.end_ = drawer;
       } else {
-        if (this.start_) {
+        if (this.start_ != null) {
           throw new MdDuplicatedSidenavException('start');
         }
         this.start_ = drawer;
@@ -310,7 +314,7 @@ export class MdSidenavLayout implements AfterContentInit {
     this.right_ = this.left_ = null;
 
     // Detect if we're LTR or RTL.
-    if (!this.dir_ || this.dir_.value === 'ltr') {
+    if (this.dir_ == null || this.dir_.value === 'ltr') {
       this.left_ = this.start_;
       this.right_ = this.end_;
     } else {
@@ -320,17 +324,17 @@ export class MdSidenavLayout implements AfterContentInit {
   }
 
   private closeModalSidenav_() {
-    if (this.start_ && this.start_.mode !== 'side') {
+    if (this.start_ != null && this.start_.mode !== 'side') {
       this.start_.close();
     }
-    if (this.end_ && this.end_.mode !== 'side') {
+    if (this.end_ != null && this.end_.mode !== 'side') {
       this.end_.close();
     }
   }
 
   private isShowingBackdrop_() {
-    return (this.start_ && this.start_.mode !== 'side' && this.start_.opened)
-        || (this.end_ && this.end_.mode !== 'side' && this.end_.opened);
+    return (this.start_ != null && this.start_.mode !== 'side' && this.start_.opened)
+        || (this.end_ != null && this.end_.mode !== 'side' && this.end_.opened);
   }
 
   /**
@@ -340,7 +344,7 @@ export class MdSidenavLayout implements AfterContentInit {
    * @private
    */
   private getSidenavEffectiveWidth_(sidenav: MdSidenav, mode: string): number {
-    if (sidenav && sidenav.mode === mode && sidenav.opened) {
+    if (sidenav != null && sidenav.mode === mode && sidenav.opened) {
       return sidenav.width_;
     }
     return 0;

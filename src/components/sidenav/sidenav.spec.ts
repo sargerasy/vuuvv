@@ -50,7 +50,7 @@ describe('MdSidenav', () => {
           fixture = f;
           testComponent = fixture.debugElement.componentInstance;
 
-          const openButtonElement = fixture.debugElement.query(By.css('.open'));
+          let openButtonElement = fixture.debugElement.query(By.css('.open'));
           openButtonElement.nativeElement.click();
         })
         .then(() => wait(1))
@@ -97,6 +97,128 @@ describe('MdSidenav', () => {
         .then(done, done.fail);
     }, 8000);
 
+    it('open() and close() return a promise that resolves after the animation ended', (done: any) => {
+      let testComponent: BasicTestApp;
+      let fixture: ComponentFixture<any>;
+      let sidenav: MdSidenav;
+
+      let promise: Promise<void>;
+      let called = false;
+
+      return builder.createAsync(BasicTestApp)
+        .then((f) => {
+          fixture = f;
+          sidenav = fixture.debugElement.query(By.directive(MdSidenav)).componentInstance;
+
+          promise = sidenav.open();
+          promise.then(() => called = true);
+        })
+        .then(() => wait(1))
+        // manual apply class attribute make transition start
+        .then(() => fixture.detectChanges())
+        .then(() => {
+          expect(called).toBe(false);
+        })
+        .then(() => promise)
+        .then(() => {
+          expect(called).toBe(true);
+        })
+        .then(() => {
+          // Close it now.
+          called = false;
+          promise = sidenav.close();
+          promise.then(() => called = true);
+        })
+        .then(() => wait(1))
+        .then(() => fixture.detectChanges())
+        .then(() => {
+          expect(called).toBe(false);
+        })
+        .then(() => promise)
+        .then(() => expect(called).toBe(true))
+        .then(done, done.fail);
+    }, 8000);
+
+    it('open() twice returns the same promise', (done: any) => {
+      let testComponent: BasicTestApp;
+      let fixture: ComponentFixture<any>;
+      let sidenav: MdSidenav;
+
+      let promise: Promise<void>;
+      let called = false;
+
+      return builder.createAsync(BasicTestApp)
+        .then((f) => {
+          fixture = f;
+          sidenav = fixture.debugElement.query(By.directive(MdSidenav)).componentInstance;
+
+          promise = sidenav.open();
+          expect(sidenav.open()).toBe(promise);
+        })
+        .then(() => wait(1))
+        .then(() => {
+          fixture.detectChanges();
+          return promise;
+        })
+        .then(() => {
+          promise = sidenav.close();
+          expect(sidenav.close()).toBe(promise);
+        })
+        .then(done, done.failed);
+    }, 8000);
+
+    it('open() then close() cancel animations when called too fast', (done: any) => {
+      let testComponent: BasicTestApp;
+      let fixture: ComponentFixture<any>;
+      let sidenav: MdSidenav;
+
+      let openPromise: Promise<void>;
+      let closePromise: Promise<void>;
+      let openCalled = false;
+      let openCancelled = false;
+      let closeCalled = false;
+
+          console.warn('-------------------');
+      return builder.createAsync(BasicTestApp)
+        .then((f) => {
+          fixture = f;
+          sidenav = fixture.debugElement.query(By.directive(MdSidenav)).componentInstance;
+
+          openPromise = sidenav.open().then(() => {
+            openCalled = true;
+          }, () => {
+            openCancelled = true;
+          });
+        })
+        .then(() => wait(1))
+        // .then(() => fixture.detectChanges)
+        // // We need to wait for the browser to start the transition.
+        // .then(() => openPromise)
+        .then(() => {
+          fixture.detectChanges();
+        })
+        .then(() => wait(50))
+        .then(() => {
+          closePromise = sidenav.close().then(() => {
+            closeCalled = true;
+          }, done.fail);
+          // return wait(3000);
+        })
+        .then(() => {
+          fixture.detectChanges();
+        })
+        .then(() => {
+          console.warn(fixture.debugElement.query(By.css('md-sidenav')).nativeElement);
+          return closePromise;
+        })
+        .then(() => {
+          expect(openCalled).toBe(false);
+          expect(openCancelled).toBe(true);
+        })
+        .then(done, done.falied);
+
+    }, 8000);
+
     it('close() then open() cancel animations when called too fast', (done: any) => {
       let testComponent: BasicTestApp;
       let fixture: ComponentFixture<any>;
@@ -108,6 +230,7 @@ describe('MdSidenav', () => {
       let closeCancelled = false;
       let openCalled = false;
 
+          console.warn('-------------------');
       return builder.createAsync(BasicTestApp).then((f) => {
         fixture = f;
         sidenav = fixture.debugElement.query(By.directive(MdSidenav)).componentInstance;
