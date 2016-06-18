@@ -1,77 +1,95 @@
-import { Component, ViewEncapsulation, OnChanges, SimpleChange } from '@angular/core';
+import { Component, ViewEncapsulation, Input, Attribute, HostBinding, HostListener } from '@angular/core';
+
+// TODO: Ink ripples.
+// TODO: Make the `isMouseDown` stuff done with one global listener.
+// TODO: Convert attribute selectors to classes when attr maps become available.
 
 @Component({
-  selector: '[md-button]:not(a), [md-raised-button]:not(a), [md-fab]:not(a)',
-  template: require('./button.html'),
-  // styles: [require('./button.scss')],
-  styles: [require('./button.scss')],
+  selector: '[md-button]:not(a), [md-raised-button]:not(a), [md-fab]:not(a), [md-mini-fab]:not(a)',
+  inputs: ['color'],
   host: {
-    '(mousedown)': 'onMousedown()',
-    '(focus)': 'onFocus()',
-    '(blur)': 'onBlur()',
     '[class.md-button-focus]': 'isKeyboardFocused',
+    '[class]': 'setClassList()',
+    '(mousedown)': 'setMousedown()',
+    '(focus)': 'setKeyboardFocus()',
+    '(blur)': 'removeKeyboardFocus()'
   },
+  template: require('./button.html'),
+  styles: [require('./button.scss')],
   encapsulation: ViewEncapsulation.None,
 })
 export class MdButton {
-  isMouseDown: boolean = false;
+  color: string;
 
+  // Whether the button has focus from the keyboard (not the mouse). Used for class binding. */
   isKeyboardFocused: boolean = false;
 
-  onMousedown() {
+  // Whether a mousedown has occurred on this element in the last 100ms. */
+  isMouseDown: boolean = false;
+
+  setClassList() { return `md-${this.color}`; }
+
+  setMousedown() {
+    // We only *show* the focus style when focus has come to the button via the keyboard.
+    // The Material Design spec is silent on this topic, and without doing this, the
+    // button continues to look :active after clicking.
+    // @see http://marcysutton.com/button-focus-hell/
     this.isMouseDown = true;
-    setTimeout(() => {
-      this.isMouseDown = false;
-    }, 100);
+    setTimeout(() => { this.isMouseDown = false; }, 100);
   }
 
-  onFocus() {
+  setKeyboardFocus($event: any) {
     this.isKeyboardFocused = !this.isMouseDown;
   }
 
-  onBlur() {
+  removeKeyboardFocus() {
     this.isKeyboardFocused = false;
   }
 }
 
 @Component({
-  selector: 'a[md-button], a[md-raised-button], a[md-fab]',
-  inputs: ['disabled'],
-  template: require('./button.html'),
-  // styles: [require('./button.scss')],
+  selector: 'a[md-button], a[md-raised-button], a[md-fab], a[md-mini-fab]',
+  inputs: ['color'],
   host: {
-    '(click)': 'onClick($event)',
-    '(mousedown)': 'onMousedown()',
-    '(focus)': 'onFocus()',
-    '(blur)': 'onBlur()',
-    '[tabIndex]': 'tabIndex',
     '[class.md-button-focus]': 'isKeyboardFocused',
-    '[attr.aria-disabled]': 'isAriaDisabled',
-  }
+    '[class]': 'setClassList()',
+    '(mousedown)': 'setMousedown()',
+    '(focus)': 'setKeyboardFocus()',
+    '(blur)': 'removeKeyboardFocus()'
+  },
+  template: require('./button.html'),
+  styles: [require('./button.scss')],
+  encapsulation: ViewEncapsulation.None,
 })
-export class MdAnchor extends MdButton implements OnChanges {
-  tabIndex: number;
-  disabled_: boolean;
+export class MdAnchor extends MdButton {
+  disabled_: boolean = null;
 
-  get disabled(): boolean {
-    return this.disabled_;
+  @HostBinding('tabIndex')
+  get tabIndex(): number {
+    return this.disabled ? -1 : 0;
   }
 
-  set disabled(value) {
-    this.disabled_ = value != null && this.disabled !== false;
-  }
-
-  onClick(event: Event) {
-    if (this.disabled) {
-      event.preventDefault();
-    }
-  }
-
-  ngOnChanges(changes: {[propName: string]: SimpleChange}) {
-    this.tabIndex = this.disabled ? -1 : 0;
-  }
-
+  @HostBinding('attr.aria-disabled')
+  /** Gets the aria-disabled value for the component, which must be a string for Dart. */
   get isAriaDisabled(): string {
     return this.disabled ? 'true' : 'false';
+  }
+
+  @HostBinding('attr.disabled')
+  @Input('disabled')
+  get disabled() { return this.disabled_; }
+
+  set disabled(value: boolean) {
+    // The presence of *any* disabled value makes the component disabled *except* for false.
+    this.disabled_ = (value != null && value !== false) ? true : null;
+  }
+
+  @HostListener('click', ['$event'])
+  haltDisabledEvents(event: Event) {
+    // A disabled button shouldn't apply any actions
+    if (this.disabled) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+    }
   }
 }

@@ -328,20 +328,22 @@ $md-blue-grey: (
 
 // Background palette for light themes.
 $md-light-theme-background: (
-  status-bar: map-get($md-grey, 300),
-  app-bar:    map-get($md-grey, 100),
-  background: map-get($md-grey, 50),
-  card:       white,
-  dialog:     white,
+  status-bar:       map-get($md-grey, 300),
+  app-bar:          map-get($md-grey, 100),
+  background:       map-get($md-grey, 50),
+  card:             white,
+  dialog:           white,
+  disabled-button:  rgba(black, 0.12),
 );
 
 // Background palette for dark themes.
 $md-dark-theme-background: (
-  status-bar: black,
-  app-bar:    map-get($md-grey, 900),
-  background: #303030,
-  card:       map-get($md-grey, 800),
-  dialog:     map-get($md-grey, 800),
+  status-bar:       black,
+  app-bar:          map-get($md-grey, 900),
+  background:       #303030,
+  card:             map-get($md-grey, 800),
+  dialog:           map-get($md-grey, 800),
+  disabled-button:  rgba(white, 0.12),
 );
 
 // Foreground palette for light themes.
@@ -350,6 +352,7 @@ $md-light-theme-foreground: (
   divider:        rgba(black, 0.12),
   dividers:       rgba(black, 0.12),
   disabled:       rgba(black, 0.38),
+  disabled-button:rgba(black, 0.38),
   disabled-text:  rgba(black, 0.38),
   hint-text:      rgba(black, 0.38),
   secondary-text: rgba(black, 0.54),
@@ -364,6 +367,7 @@ $md-dark-theme-foreground: (
   divider:        rgba(white, 0.12),
   dividers:       rgba(white, 0.12),
   disabled:       rgba(white, 0.30),
+  disabled-button:rgba(white, 0.30),
   disabled-text:  rgba(white, 0.30),
   hint-text:      rgba(white, 0.30),
   secondary-text: rgba(white, 0.70),
