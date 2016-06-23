@@ -8,14 +8,12 @@ import {
   HostBinding,
   HostListener,
   Input,
-  ViewEncapsulation,
-  OnChanges,
   Optional,
   Output,
   Query,
   QueryList,
-  SimpleChange,
-  Type
+  Type,
+  ChangeDetectionStrategy
 }
 from '@angular/core';
 import { isPresent } from '@angular/common/src/facade/lang';
@@ -47,7 +45,8 @@ export class MdDuplicatedSidenavException extends BaseException {
  */
 @Component({
   selector: 'md-sidenav',
-  template: '<ng-content></ng-content>'
+  template: '<ng-content></ng-content>',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MdSidenav {
   /** Alignment of the sidenav (direction neutral); whether 'start' or 'end'. */
@@ -164,7 +163,6 @@ export class MdSidenav {
          // Simpler version to check for prefixes.
          && e.propertyName.endsWith('transform')) {
       this.transition_ = false;
-      console.warn(`transition end: ${this.opened_}`);
       if (this.opened_) {
         if (this.openPromise_ != null) {
           this.openPromiseResolve_();
@@ -253,6 +251,9 @@ export class MdSidenav {
   directives: [MdSidenav],
   template: require('./sidenav.html'),
   styles: [require('./sidenav.scss')],
+  // Do not use ChangeDetectionStrategy.OnPush. It does not work for this component because
+  // technically it is a sibling of MdSidenav (on the content tree) and isn't updated when MdSidenav
+  // changes its state.
 })
 export class MdSidenavLayout implements AfterContentInit {
   @ContentChildren(MdSidenav) private sidenavs_: QueryList<MdSidenav>;

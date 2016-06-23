@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 
 /*
 
@@ -24,6 +24,7 @@ card sections, including:
   template: require('./card.html'),
   styles: [require('./card.scss')],
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MdCard {}
 
@@ -62,6 +63,7 @@ TODO: update link to demo site when it exists
   selector: 'md-card-title-group',
   template: require('./card-title-group.html'),
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MdCardTitleGroup {}
 

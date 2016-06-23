@@ -82,7 +82,9 @@ describe('MdSidenav', () => {
           expect(testComponent.closeCount).toBe(0);
         })
         .then(() => waitOnEvent(fixture, By.directive(MdSidenav), 'onClose'))
-        .then(() => fixture.detectChanges())
+        .then(() => {
+          fixture.detectChanges();
+        })
         .then(() => {
           expect(testComponent.openStartCount).toBe(1);
           expect(testComponent.openCount).toBe(1);
@@ -178,7 +180,6 @@ describe('MdSidenav', () => {
       let openCancelled = false;
       let closeCalled = false;
 
-          console.warn('-------------------');
       return builder.createAsync(BasicTestApp)
         .then((f) => {
           fixture = f;
@@ -191,12 +192,10 @@ describe('MdSidenav', () => {
           });
         })
         .then(() => wait(1))
-        // .then(() => fixture.detectChanges)
-        // // We need to wait for the browser to start the transition.
-        // .then(() => openPromise)
         .then(() => {
           fixture.detectChanges();
         })
+        // // We need to wait for the browser to start the transition.
         .then(() => wait(50))
         .then(() => {
           closePromise = sidenav.close().then(() => {
@@ -208,7 +207,6 @@ describe('MdSidenav', () => {
           fixture.detectChanges();
         })
         .then(() => {
-          console.warn(fixture.debugElement.query(By.css('md-sidenav')).nativeElement);
           return closePromise;
         })
         .then(() => {
@@ -230,7 +228,6 @@ describe('MdSidenav', () => {
       let closeCancelled = false;
       let openCalled = false;
 
-          console.warn('-------------------');
       return builder.createAsync(BasicTestApp).then((f) => {
         fixture = f;
         sidenav = fixture.debugElement.query(By.directive(MdSidenav)).componentInstance;
