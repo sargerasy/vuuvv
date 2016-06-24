@@ -6,6 +6,7 @@ import '../styles.scss';
 import { ButtonDemo } from './button/button-demo';
 import { CardDemo } from './card/card-demo';
 import { SidenavDemo } from './sidenav/sidenav-demo';
+import { ProgressCircleDemo } from './progress-circle/progress-circle-demo';
 import { Dir } from '../directives/dir/dir';
 import { MdButton } from '../components/button/button';
 
@@ -26,7 +27,8 @@ export class Home {}
   {path: '/', name: 'Home', component: Home},
   {path: '/button', name: 'ButtonDemo', component: ButtonDemo},
   {path: '/card', name: 'CardDemo', component: CardDemo},
-  {path: '/sidenav', name: 'SidenavDemo', component: SidenavDemo}
+  {path: '/sidenav', name: 'SidenavDemo', component: SidenavDemo},
+  {path: '/progress-circle', name: 'ProgressCircleDemo', component: ProgressCircleDemo},
 ])
 export class AppComponent {
 }
