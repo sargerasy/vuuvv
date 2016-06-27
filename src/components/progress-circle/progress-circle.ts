@@ -37,12 +37,9 @@ export class MdProgressCircle {
    * Input: number, defaults to 0.
    * value_ is bound to the host as the attribute aria-valuenow.
    */
+  @HostBinding('attr.aria-valuenow')
   @Input('value')
   value_: number = 0;
-  @HostBinding('attr.aria-valuenow')
-  get _value() {
-    return this.value_;
-  }
 
   /**
    * Mode of the progress circle
@@ -50,13 +47,10 @@ export class MdProgressCircle {
    * Input must be one of the values from ProgressMode, defaults to 'determinate'.
    * mode is bound to the host as the attribute host.
    */
+  @HostBinding('attr.mode')
   @Input()
   @OneOf([ProgressMode.DETERINATE, ProgressMode.INDETERMINATE])
   mode: string;
-  @HostBinding('attr.mode')
-  get _mode() {
-    return this.mode;
-  }
 
   /**
    * Gets the current stroke dash offset to represent the progress circle.
