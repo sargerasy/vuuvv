@@ -7,6 +7,7 @@ import { ButtonDemo } from './button/button-demo';
 import { CardDemo } from './card/card-demo';
 import { SidenavDemo } from './sidenav/sidenav-demo';
 import { ProgressCircleDemo } from './progress-circle/progress-circle-demo';
+import { PortalDemo } from './portal/portal-demo';
 import { Dir } from '../directives/dir/dir';
 import { MdButton } from '../components/button/button';
 
@@ -29,6 +30,7 @@ export class Home {}
   {path: '/card', name: 'CardDemo', component: CardDemo},
   {path: '/sidenav', name: 'SidenavDemo', component: SidenavDemo},
   {path: '/progress-circle', name: 'ProgressCircleDemo', component: ProgressCircleDemo},
+  {path: '/portal', name: 'PortalDemo', component: PortalDemo},
 ])
 export class AppComponent {
 }
