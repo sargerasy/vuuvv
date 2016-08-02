@@ -116,7 +116,7 @@ export class TemplatePortal extends Portal<Map<string, any>> {
 }
 
 /**
- * A `PortalHost is an space that can contain a single `Portal`.
+ * A `PortalHost` is an space that can contain a single `Portal`.
  */
 export interface PortalHost {
   attach(portal: Portal<any>): Promise<any>;

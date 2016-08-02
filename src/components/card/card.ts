@@ -21,8 +21,8 @@ card sections, including:
 
 @Component({
   selector: 'md-card',
-  template: require('./card.html'),
-  styles: [require('./card.scss')],
+  templateUrl: './card.html',
+  styleUrls: ['./card.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -43,7 +43,7 @@ TODO: update link to demo site when it exists
 
 @Component({
   selector: 'md-card-header',
-  template: require('./card-header.html'),
+  templateUrl: './card-header.html',
   encapsulation: ViewEncapsulation.None,
 })
 export class MdCardHeader {}
@@ -61,7 +61,7 @@ TODO: update link to demo site when it exists
 
 @Component({
   selector: 'md-card-title-group',
-  template: require('./card-title-group.html'),
+  templateUrl: './card-title-group.html',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

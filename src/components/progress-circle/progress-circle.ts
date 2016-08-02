@@ -26,8 +26,8 @@ class ProgressMode {
     'aria-valuemin': '0',
     'aria-valuemax': '100',
   },
-  template: require('./progress-circle.html'),
-  styles: [require('./progress-circle.scss')],
+  templateUrl: './progress-circle.html',
+  styleUrls: ['./progress-circle.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MdProgressCircle {
@@ -97,8 +97,8 @@ export class MdProgressCircle {
   host: {
     'role': 'progressbar',
   },
-  template: require('./progress-circle.html'),
-  styles: [require('./progress-circle.scss')],
+  templateUrl: './progress-circle.html',
+  styleUrls: ['./progress-circle.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MdSpinner extends MdProgressCircle {

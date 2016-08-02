@@ -17,8 +17,8 @@ import {
     '(focus)': 'setKeyboardFocus()',
     '(blur)': 'removeKeyboardFocus()'
   },
-  template: require('./button.html'),
-  styles: [require('./button.scss')],
+  templateUrl: './button.html',
+  styleUrls: ['./button.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -61,8 +61,8 @@ export class MdButton {
     '(focus)': 'setKeyboardFocus()',
     '(blur)': 'removeKeyboardFocus()'
   },
-  template: require('./button.html'),
-  styles: [require('./button.scss')],
+  templateUrl: './button.html',
+  styleUrls: ['./button.scss'],
   encapsulation: ViewEncapsulation.None,
 })
 export class MdAnchor extends MdButton {

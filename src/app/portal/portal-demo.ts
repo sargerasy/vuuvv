@@ -6,8 +6,8 @@ import { TemplatePortalDirective, PortalHostDirective } from '../../core/portal/
 @Component({
   moduleId: module.id,
   selector: 'portal-demo',
-  template: require('./portal-demo.html'),
-  styles: [require('./portal-demo.scss')],
+  templateUrl: './portal-demo.html',
+  styleUrls: ['./portal-demo.scss'],
   directives: [TemplatePortalDirective, PortalHostDirective],
 })
 export class PortalDemo {

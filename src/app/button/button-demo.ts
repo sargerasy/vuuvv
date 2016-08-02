@@ -3,8 +3,8 @@ import { MdButton, MdAnchor } from '../../components/button/button';
 
 @Component({
   selector: 'button-demo',
-  template: require('./button-demo.html'),
-  styles: [require('./button-demo.scss')],
+  templateUrl: './button-demo.html',
+  styleUrls: ['./button-demo.scss'],
   directives: [MdButton, MdAnchor]
 })
 export class ButtonDemo {

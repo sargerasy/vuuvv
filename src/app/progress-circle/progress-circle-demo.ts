@@ -4,8 +4,8 @@ import { MdProgressCircle, MdSpinner } from '../../components/progress-circle/pr
 
 @Component({
   selector: 'progress-circle-demo',
-  template: require('./progress-circle-demo.html'),
-  styles: [require('./progress-circle-demo.scss')],
+  templateUrl: './progress-circle-demo.html',
+  styleUrls: ['./progress-circle-demo.scss'],
   directives: [MdProgressCircle, MdSpinner, MdButton]
 })
 export class ProgressCircleDemo {

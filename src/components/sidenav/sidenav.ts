@@ -249,8 +249,8 @@ export class MdSidenav {
 @Component({
   selector: 'md-sidenav-layout',
   directives: [MdSidenav],
-  template: require('./sidenav.html'),
-  styles: [require('./sidenav.scss')],
+  templateUrl: './sidenav.html',
+  styleUrls: ['./sidenav.scss'],
   // Do not use ChangeDetectionStrategy.OnPush. It does not work for this component because
   // technically it is a sibling of MdSidenav (on the content tree) and isn't updated when MdSidenav
   // changes its state.
